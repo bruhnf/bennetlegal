@@ -1,28 +1,33 @@
 # Production compose for the shared Lightsail host (bruhnfreeman-com).
-# The container is bound to 127.0.0.1 only — public traffic reaches it through
-# the host's existing Caddy reverse proxy (TLS + HTTPS) for bennetlegalpartners.com.
+#
+# The host runs a containerized Caddy reverse proxy on the external Docker
+# network `web`. Every app container joins `web`, and Caddy proxies to it by
+# container name (e.g. `reverse_proxy bennetlegal-web:3000`). We therefore do
+# NOT publish any host ports here — traffic only reaches the app through Caddy
+# (which terminates TLS). This mirrors the existing apps on the box
+# (naturalbliss-web, merlin-web, bruhnfreeman).
 #
 # Usage on the server:
 #   docker compose up -d --build
-#
-# Change HOST_PORT if 3020 is already taken on the box (check with `ss -tlnp`).
+#   # then add a site block to /srv/proxy/Caddyfile and reload Caddy.
 
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    image: bennet-legal-web:latest
-    container_name: bennet-legal-web
+    image: bennetlegal-web:latest
+    container_name: bennetlegal-web
     restart: unless-stopped
-    # Bind to loopback only; Caddy proxies to it. Never expose 0.0.0.0 here.
-    ports:
-      - "127.0.0.1:${HOST_PORT:-3020}:3000"
     env_file:
       - .env
     environment:
       - NODE_ENV=production
       - PORT=3000
+    expose:
+      - "3000"
+    networks:
+      - web
     healthcheck:
       test:
         [
@@ -34,4 +39,9 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 15s
+      start_period: 20s
+
+networks:
+  # The shared proxy network created by the host's Caddy stack.
+  web:
+    external: true

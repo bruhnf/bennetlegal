@@ -1,28 +1,28 @@
 # Deployment — Bennet Legal Research Group
 
 Production host: **bruhnfreeman-com** AWS Lightsail box (`3.223.180.176`), a shared Ubuntu host
-running Docker behind a reverse proxy. The domain **bennetlegalpartners.com** has an A record
-pointing at this box; the app runs as a container bound to `127.0.0.1:3020` and is exposed to the
-internet only through the host's reverse proxy (TLS terminated there).
+running a **containerized Caddy** reverse proxy on the external Docker network `web`. The domain
+**bennetlegalpartners.com** has an A record pointing at this box. The app runs as a container
+(`bennetlegal-web`) joined to the `web` network; Caddy reaches it by container name and terminates
+TLS. The container publishes **no** host ports — it's reachable only through Caddy.
 
-> This is a **shared** host running other stacks. Never expose the container on `0.0.0.0`, never
-> bind privileged ports directly, and never run a standalone certbot — go through the existing
-> proxy per-subdomain.
+> This is a **shared** host running other stacks (naturalbliss, merlin, bruhnfreeman). Never
+> publish host ports, never bind `0.0.0.0`, and never run a standalone certbot — Caddy owns TLS.
 
 ---
 
 ## Architecture
 
 ```
-Internet ──HTTPS──> Caddy (host :443, auto-TLS)
-                      └── bennetlegalpartners.com ──reverse_proxy──> 127.0.0.1:3020
-                                                                    └── Docker: bennet-legal-web (:3000)
+Internet ──HTTPS──> caddy container (:443, auto-TLS, network: web)
+                      └── bennetlegalpartners.com ──reverse_proxy──> bennetlegal-web:3000
+                                                                       (Next.js, network: web)
 ```
 
 ## Prerequisites (already true on the box)
 
 - Docker + Docker Compose plugin
-- A reverse proxy (Caddy) fronting all subdomains
+- Containerized Caddy on the external `web` network; config at `/srv/proxy/Caddyfile`
 - DNS: `bennetlegalpartners.com` A record → `3.223.180.176` (done)
 
 ---
@@ -81,14 +81,14 @@ cd ~/bennetlegal
 
 # Create the environment file from the template and fill in real values
 cp .env.example .env
-nano .env    # set AWS keys, CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL, HOST_PORT
+nano .env    # set AWS keys, CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL
 
-# Build + start (bound to 127.0.0.1:3020)
+# Build + start (joins the external `web` network; no host ports)
 docker compose up -d --build
 
-# Verify the container is healthy and answering locally
+# Verify the container is healthy and answering from inside the network
 docker compose ps
-curl -s http://127.0.0.1:3020/api/health   # -> {"status":"ok",...}
+docker exec bennetlegal-web node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>r.text()).then(console.log)"
 ```
 
 ### Redeploying after a code change
@@ -101,46 +101,26 @@ cd ~/bennetlegal && git pull && docker compose up -d --build
 
 ## 4. Wire up the reverse proxy (run on the server)
 
-### If the host uses Caddy
-
-Add a site block to the host Caddyfile (commonly `/etc/caddy/Caddyfile`), then reload:
+The host runs a containerized Caddy with its config at `/srv/proxy/Caddyfile`. Append a site block
+that proxies to the app by container name (the `(app_headers)` snippet already defined in that file
+suits a dynamic app — it omits the strict static-site CSP that would block Google Fonts):
 
 ```caddy
-bennetlegalpartners.com, www.bennetlegalpartners.com {
-    encode zstd gzip
-    reverse_proxy 127.0.0.1:3020
+bennetlegalpartners.com {
+    import app_headers
+    encode gzip zstd
+    reverse_proxy bennetlegal-web:3000
 }
 ```
 
-```bash
-sudo caddy validate --config /etc/caddy/Caddyfile
-sudo systemctl reload caddy
-```
-
-Caddy will obtain and renew the TLS certificate automatically.
-
-### If the host uses nginx + certbot instead
-
-Create `/etc/nginx/sites-available/bennetlegalpartners.com`:
-
-```nginx
-server {
-    server_name bennetlegalpartners.com www.bennetlegalpartners.com;
-    location / {
-        proxy_pass http://127.0.0.1:3020;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
+Then reload Caddy in place (no restart needed):
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/bennetlegalpartners.com /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d bennetlegalpartners.com -d www.bennetlegalpartners.com
+docker exec caddy caddy reload --config /etc/caddy/Caddyfile
 ```
+
+Caddy obtains and renews the TLS certificate automatically. (Skip a `www.` block unless a `www`
+DNS record exists, or Caddy will retry a cert it can't get for that name.)
 
 ## 5. Verify live
 
@@ -148,6 +128,9 @@ sudo certbot --nginx -d bennetlegalpartners.com -d www.bennetlegalpartners.com
 curl -I https://bennetlegalpartners.com                 # 200, valid TLS
 curl -s https://bennetlegalpartners.com/api/health      # {"status":"ok",...}
 ```
+
+> First request after adding the Caddy block may take a few seconds while Caddy provisions the
+> Let's Encrypt certificate.
 
 Then load the site in a browser: dark theme by default, animated hero, all sections, and submit a
 test message through the contact form — it should arrive at `CONTACT_TO_EMAIL`.
