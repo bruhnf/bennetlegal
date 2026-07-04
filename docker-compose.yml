@@ -1,0 +1,37 @@
+# Production compose for the shared Lightsail host (bruhnfreeman-com).
+# The container is bound to 127.0.0.1 only — public traffic reaches it through
+# the host's existing Caddy reverse proxy (TLS + HTTPS) for bennetlegalgroup.com.
+#
+# Usage on the server:
+#   docker compose up -d --build
+#
+# Change HOST_PORT if 3020 is already taken on the box (check with `ss -tlnp`).
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bennet-legal-web:latest
+    container_name: bennet-legal-web
+    restart: unless-stopped
+    # Bind to loopback only; Caddy proxies to it. Never expose 0.0.0.0 here.
+    ports:
+      - "127.0.0.1:${HOST_PORT:-3020}:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

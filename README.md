@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bennet Legal Research Group — Website
 
-## Getting Started
+Marketing site for **Bennet Legal Research Group** — _Intelligence That Wins_. A bold,
+high-energy legal-tech landing experience: AI-powered legal research, big-data intelligence, and
+predictive strategy for enterprises and law firms.
 
-First, run the development server:
+> Bennet Legal is **not** a law firm. It's the research and intelligence powerhouse behind the win.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech stack
+
+- **Next.js 15** (App Router) + **TypeScript**
+- **Tailwind CSS v4** + **shadcn/ui** (base-nova / Base UI + Radix primitives)
+- **Framer Motion** — scroll-triggered reveals, animated hero
+- **AWS SES** — contact / proposal form email
+- **next-themes** — dark by default, elegant light mode
+- **Canvas** — bespoke animated data-network hero (no external assets)
+
+## Project structure
+
+```
+bennetapp/
+├─ src/
+│  ├─ app/
+│  │  ├─ layout.tsx            # Root layout: fonts, theme provider, header/footer, SEO
+│  │  ├─ page.tsx              # Single-page landing (assembles all sections)
+│  │  ├─ globals.css           # Design system: brand tokens, utilities, keyframes
+│  │  ├─ not-found.tsx         # Branded 404
+│  │  ├─ robots.ts / sitemap.ts
+│  │  ├─ insights/             # Insights listing page
+│  │  ├─ portal/               # Client Portal login teaser
+│  │  ├─ privacy/ · terms/     # Legal templates
+│  │  └─ api/
+│  │     ├─ contact/route.ts   # Validates + emails via SES (rate-limited)
+│  │     ├─ checkout/route.ts  # Mock Stripe checkout (ready to wire live)
+│  │     └─ health/route.ts    # Healthcheck for Docker/monitoring
+│  ├─ components/
+│  │  ├─ sections/             # hero, services, why-bennet, insights,
+│  │  │                        #   success-stories, about, cta, trusted-by
+│  │  ├─ layout/               # site-header (sticky nav), site-footer
+│  │  ├─ ui/                   # shadcn/ui components
+│  │  ├─ hero-network.tsx      # Animated canvas data-network
+│  │  ├─ contact-form.tsx      # Secure form (client)
+│  │  ├─ reveal.tsx            # Framer Motion scroll-reveal helpers
+│  │  └─ ...                   # brand-logo, theme-toggle, stat-counter, etc.
+│  └─ lib/
+│     ├─ site.ts               # Brand facts, nav, contact details  <- edit me
+│     ├─ content.ts            # All marketing copy/data            <- edit me
+│     ├─ validation.ts         # Shared zod schema (client + API)
+│     ├─ mailer.ts             # AWS SES sender
+│     └─ rate-limit.ts         # In-memory rate limiter
+├─ Dockerfile · docker-compose.yml · .dockerignore
+├─ .env.example
+├─ DEPLOYMENT.md               # Full server deploy runbook
+└─ TODOS.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting started (local)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# From the project root (e:/Projects/BennetLegal/bennetapp)
+npm install
+cp .env.example .env        # fill in values (or leave SES blank — form logs instead)
+npm run dev                 # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Scripts:
 
-## Learn More
+| Command         | What it does                          |
+| --------------- | ------------------------------------- |
+| `npm run dev`   | Start the dev server                  |
+| `npm run build` | Production build (standalone output)  |
+| `npm run start` | Serve the production build            |
+| `npm run lint`  | Lint with ESLint (Next config)        |
 
-To learn more about Next.js, take a look at the following resources:
+## Editing content & brand
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Copy / data:** `src/lib/content.ts` (services, stories, insights, team, stats).
+- **Brand facts / nav / contact:** `src/lib/site.ts`.
+- **Colors / fonts / effects:** `src/app/globals.css` (`--brand-*` tokens near the top).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Placeholder imagery
 
-## Deploy on Vercel
+Image placeholders carry a `data-image-hint` attribute (and a `[ AI visual placeholder ]`
+label) describing the art to generate and drop in. Search the codebase for `imageHint` to find
+them all. Replace each placeholder block with an `<Image>` or `<img>` when assets are ready.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact form (AWS SES)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The form posts to `/api/contact`, which validates with zod, rate-limits by IP, and emails via
+AWS SES. If SES env vars are absent, submissions are logged (never fail the UX). See `.env.example`
+and `DEPLOYMENT.md` for the least-privilege IAM setup.
+
+## Payments (mock Stripe)
+
+`/api/checkout` is stubbed in safe "mock mode." To go live: `npm install stripe`, set
+`STRIPE_SECRET_KEY` + a Price ID, and follow the inline instructions in
+`src/app/api/checkout/route.ts`.
+
+## Deployment
+
+Dockerized and served behind Caddy on AWS Lightsail. See **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
+
+## Future backend integration
+
+- **Client Portal auth:** wire NextAuth / Supabase / AWS Cognito into `src/app/portal/page.tsx`.
+- **Persistence / CRM:** store contact submissions (DynamoDB / Supabase / Postgres) in
+  `src/app/api/contact/route.ts` alongside the SES send.
+- **Rate limiting at scale:** swap the in-memory limiter for Upstash Redis.
