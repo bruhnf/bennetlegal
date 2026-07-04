@@ -56,7 +56,7 @@ export async function sendContactEmail(input: ContactInput): Promise<void> {
   ];
 
   const textBody = [
-    "New intelligence request from bennetlegalgroup.com",
+    "New intelligence request from bennetlegalpartners.com",
     "",
     ...rows.map(([k, v]) => `${k}: ${v}`),
     "",
@@ -67,7 +67,7 @@ export async function sendContactEmail(input: ContactInput): Promise<void> {
   const htmlBody = `
     <div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;color:#0a1128">
       <h2 style="color:#4f46e5;margin-bottom:4px">New Intelligence Request</h2>
-      <p style="color:#55627d;margin-top:0">via bennetlegalgroup.com</p>
+      <p style="color:#55627d;margin-top:0">via bennetlegalpartners.com</p>
       <table style="width:100%;border-collapse:collapse;margin:16px 0">
         ${rows
           .map(

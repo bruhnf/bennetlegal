@@ -1,6 +1,6 @@
 # Production compose for the shared Lightsail host (bruhnfreeman-com).
 # The container is bound to 127.0.0.1 only — public traffic reaches it through
-# the host's existing Caddy reverse proxy (TLS + HTTPS) for bennetlegalgroup.com.
+# the host's existing Caddy reverse proxy (TLS + HTTPS) for bennetlegalpartners.com.
 #
 # Usage on the server:
 #   docker compose up -d --build

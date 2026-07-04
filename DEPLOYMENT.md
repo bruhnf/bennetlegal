@@ -1,7 +1,7 @@
 # Deployment — Bennet Legal Research Group
 
 Production host: **bruhnfreeman-com** AWS Lightsail box (`3.223.180.176`), a shared Ubuntu host
-running Docker behind a reverse proxy. The domain **bennetlegalgroup.com** has an A record
+running Docker behind a reverse proxy. The domain **bennetlegalpartners.com** has an A record
 pointing at this box; the app runs as a container bound to `127.0.0.1:3020` and is exposed to the
 internet only through the host's reverse proxy (TLS terminated there).
 
@@ -15,7 +15,7 @@ internet only through the host's reverse proxy (TLS terminated there).
 
 ```
 Internet ──HTTPS──> Caddy (host :443, auto-TLS)
-                      └── bennetlegalgroup.com ──reverse_proxy──> 127.0.0.1:3020
+                      └── bennetlegalpartners.com ──reverse_proxy──> 127.0.0.1:3020
                                                                     └── Docker: bennet-legal-web (:3000)
 ```
 
@@ -23,7 +23,7 @@ Internet ──HTTPS──> Caddy (host :443, auto-TLS)
 
 - Docker + Docker Compose plugin
 - A reverse proxy (Caddy) fronting all subdomains
-- DNS: `bennetlegalgroup.com` A record → `3.223.180.176` (done)
+- DNS: `bennetlegalpartners.com` A record → `3.223.180.176` (done)
 
 ---
 
@@ -69,8 +69,8 @@ aws iam create-access-key --user-name bennetlegal-ses
 ```
 
 `CONTACT_FROM_EMAIL` must be a **verified** SES identity. `bruhn@bruhnfreeman.com` is already
-verified. To send from `intelligence@bennetlegalgroup.com`, first verify the
-`bennetlegalgroup.com` domain in SES (adds a few DNS records) or verify that specific address.
+verified. To send from `intelligence@bennetlegalpartners.com`, first verify the
+`bennetlegalpartners.com` domain in SES (adds a few DNS records) or verify that specific address.
 
 ## 3. Deploy the app (run on the server)
 
@@ -106,7 +106,7 @@ cd ~/bennetlegal && git pull && docker compose up -d --build
 Add a site block to the host Caddyfile (commonly `/etc/caddy/Caddyfile`), then reload:
 
 ```caddy
-bennetlegalgroup.com, www.bennetlegalgroup.com {
+bennetlegalpartners.com, www.bennetlegalpartners.com {
     encode zstd gzip
     reverse_proxy 127.0.0.1:3020
 }
@@ -121,11 +121,11 @@ Caddy will obtain and renew the TLS certificate automatically.
 
 ### If the host uses nginx + certbot instead
 
-Create `/etc/nginx/sites-available/bennetlegalgroup.com`:
+Create `/etc/nginx/sites-available/bennetlegalpartners.com`:
 
 ```nginx
 server {
-    server_name bennetlegalgroup.com www.bennetlegalgroup.com;
+    server_name bennetlegalpartners.com www.bennetlegalpartners.com;
     location / {
         proxy_pass http://127.0.0.1:3020;
         proxy_set_header Host $host;
@@ -137,16 +137,16 @@ server {
 ```
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/bennetlegalgroup.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/bennetlegalpartners.com /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d bennetlegalgroup.com -d www.bennetlegalgroup.com
+sudo certbot --nginx -d bennetlegalpartners.com -d www.bennetlegalpartners.com
 ```
 
 ## 5. Verify live
 
 ```bash
-curl -I https://bennetlegalgroup.com                 # 200, valid TLS
-curl -s https://bennetlegalgroup.com/api/health      # {"status":"ok",...}
+curl -I https://bennetlegalpartners.com                 # 200, valid TLS
+curl -s https://bennetlegalpartners.com/api/health      # {"status":"ok",...}
 ```
 
 Then load the site in a browser: dark theme by default, animated hero, all sections, and submit a

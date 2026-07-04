@@ -10,11 +10,11 @@ export const siteConfig = {
   description:
     "Bennet Legal Research Group delivers AI-powered legal research, big-data intelligence, and predictive strategy to the enterprises and law firms that need a decisive edge. We are not a law firm — we are the research and intelligence powerhouse behind the win.",
   // Update to the production domain. Used for canonical URLs, sitemap, and Open Graph.
-  url: "https://bennetlegalgroup.com",
+  url: "https://bennetlegalpartners.com",
   ogImage: "/og.png",
   // Public-facing contact details (placeholders — replace with real ones).
   contact: {
-    email: "intelligence@bennetlegalgroup.com",
+    email: "intelligence@bennetlegalpartners.com",
     phone: "+1 (212) 555-0142",
     address: "One Bryant Park, 42nd Floor, New York, NY 10036",
   },

@@ -29,7 +29,7 @@ Living list of discussed-but-not-done work. Ranked by effort (H/M/L) and UX impa
 
 ## Infra / deploy
 
-- [ ] Verify SES domain identity for bennetlegalgroup.com so mail sends from an @-domain address. (L)
+- [ ] Verify SES domain identity for bennetlegalpartners.com so mail sends from an @-domain address. (L)
 - [ ] Add CI (GitHub Actions): lint + build on PR, deploy on merge to `main`. (M, moderate)
 - [ ] Set up branch protection on `main`/`develop` (require PR + passing CI). (L, moderate)
-- [ ] Add SSL-expiry monitoring for bennetlegalgroup.com. (L, low)
+- [ ] Add SSL-expiry monitoring for bennetlegalpartners.com. (L, low)
