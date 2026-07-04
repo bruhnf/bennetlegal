@@ -4,6 +4,7 @@ import { Services } from "@/components/sections/services";
 import { WhyBennet } from "@/components/sections/why-bennet";
 import { Insights } from "@/components/sections/insights";
 import { SuccessStories } from "@/components/sections/success-stories";
+import { Creed } from "@/components/sections/creed";
 import { About } from "@/components/sections/about";
 import { CTA } from "@/components/sections/cta";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
       <WhyBennet />
       <Insights />
       <SuccessStories />
+      <Creed />
       <About />
       <CTA />
     </>

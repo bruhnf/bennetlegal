@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, PhoneCall, ShieldCheck, Sparkles, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroNetwork } from "@/components/hero-network";
 import { StatCounter } from "@/components/stat-counter";
 import { stats } from "@/lib/content";
 
@@ -13,42 +13,45 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.75, delay: 0.12 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
+/**
+ * Hero — cinematic, full-bleed courtroom photograph with a left-weighted dark
+ * scrim so the serif headline and CTAs stay legible. The image sits behind a
+ * gradient that fades into the parchment page below.
+ */
 export function Hero() {
   return (
     <section
       id="home"
       className="relative flex min-h-[100svh] items-center overflow-hidden pt-16"
     >
-      {/* Layered background: deep navy gradient + animated network + glow blobs */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_color-mix(in_oklab,var(--brand-indigo)_18%,transparent),transparent_55%),radial-gradient(ellipse_at_bottom_right,_color-mix(in_oklab,var(--brand-teal)_14%,transparent),transparent_50%)]" />
-      <div className="absolute inset-0 -z-10 opacity-70">
-        <HeroNetwork />
-      </div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-grid opacity-[0.06] mask-fade-b" />
+      {/* Full-bleed courtroom photograph */}
+      <Image
+        src="/images/courtroom-argument.jpg"
+        alt="An attorney addressing the court beneath an engraving that reads Justice"
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover object-center"
+      />
+      {/* Cinematic scrims for legibility + blend into the page */}
+      <div className="photo-scrim absolute inset-0 -z-10" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute -left-40 top-1/4 -z-10 h-96 w-96 rounded-full bg-brand-teal/20 blur-[120px] animate-float-slow"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-b from-transparent to-background"
         aria-hidden="true"
       />
-      <div
-        className="pointer-events-none absolute -right-32 bottom-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-brand-indigo/25 blur-[130px] animate-float"
-        aria-hidden="true"
-      />
-      {/* Fade the network into the page below */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-background" />
+      {/* Thin brass top-of-fold accent */}
+      <div className="pointer-events-none absolute inset-x-0 top-16 -z-10 h-px bg-gradient-to-r from-transparent via-brand-teal/50 to-transparent" />
 
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+        <div className="max-w-2xl">
           <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-xs font-semibold text-muted-foreground backdrop-blur-md sm:text-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-teal opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-teal" />
-              </span>
-              The intelligence layer for elite legal teams
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-teal/40 bg-black/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#e7d4ab] backdrop-blur-sm">
+              <Scale className="h-3.5 w-3.5" />
+              The intelligence behind the verdict
             </span>
           </motion.div>
 
@@ -57,7 +60,7 @@ export function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-6 text-balance text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl"
+            className="mt-6 text-balance font-heading text-4xl font-bold leading-[1.06] text-[#f7f1e3] sm:text-6xl lg:text-7xl"
           >
             Intelligence that <span className="text-gradient">wins</span> the case
             before it begins
@@ -68,7 +71,7 @@ export function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
+            className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-[#e8ddc8]/90 sm:text-xl"
           >
             Bennet Legal Research Group fuses proprietary AI, big-data analytics, and
             predictive strategy into decisive intelligence for the world&apos;s most
@@ -81,12 +84,12 @@ export function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
+            className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
           >
             <Button
               asChild
               size="lg"
-              className="group h-12 rounded-full bg-brand-gradient px-7 text-base text-white shadow-xl shadow-brand-indigo/30 transition-all hover:shadow-brand-indigo/50"
+              className="group h-12 rounded-md bg-brand-gradient-warm px-7 text-base font-semibold text-[#23180d] shadow-xl shadow-black/40 transition-all hover:brightness-105"
             >
               <Link href="/#contact">
                 <Sparkles className="mr-1 h-4 w-4" />
@@ -98,7 +101,7 @@ export function Hero() {
               asChild
               size="lg"
               variant="outline"
-              className="h-12 rounded-full border-border/80 bg-background/40 px-7 text-base backdrop-blur-md"
+              className="h-12 rounded-md border-[#e7d4ab]/50 bg-black/20 px-7 text-base text-[#f3ecdd] backdrop-blur-sm hover:bg-black/40 hover:text-white"
             >
               <Link href="/#contact">
                 <PhoneCall className="mr-1.5 h-4 w-4" />
@@ -112,34 +115,34 @@ export function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#d8c8a8]"
           >
             <span className="inline-flex items-center gap-1.5">
-              <Zap className="h-4 w-4 text-brand-teal" /> Insight in hours, not weeks
+              <ShieldCheck className="h-4 w-4 text-brand-teal-bright" /> Insight in hours, not weeks
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-brand-teal" /> Bank-grade confidentiality
+              <ShieldCheck className="h-4 w-4 text-brand-teal-bright" /> Bank-grade confidentiality
             </span>
           </motion.div>
         </div>
 
-        {/* Stat band */}
+        {/* Stat band — glass strip over the photograph */}
         <motion.div
           custom={5}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border/60 md:grid-cols-4"
+          className="mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-[#e7d4ab]/20 bg-[#e7d4ab]/10 backdrop-blur-md md:grid-cols-4"
         >
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center gap-1 bg-card/60 px-4 py-6 text-center backdrop-blur-sm"
+              className="flex flex-col items-center gap-1 bg-black/25 px-4 py-6 text-center"
             >
-              <span className="font-heading text-3xl font-bold text-gradient sm:text-4xl">
+              <span className="font-heading text-3xl font-bold text-[#e7d4ab] sm:text-4xl">
                 <StatCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
               </span>
-              <span className="text-xs text-muted-foreground sm:text-sm">{stat.label}</span>
+              <span className="text-xs text-[#d8c8a8] sm:text-sm">{stat.label}</span>
             </div>
           ))}
         </motion.div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
 import { services } from "@/lib/content";
@@ -67,17 +68,17 @@ export function Services() {
                     </ul>
                   </div>
 
-                  {/* Placeholder visual — replace with AI-generated art (see imageHint) */}
+                  {/* Featured visual — courtroom photograph */}
                   {featured && (
-                    <div
-                      className="relative mt-6 hidden aspect-[4/3] w-full shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-brand-navy-deep lg:mt-0 lg:flex lg:w-72"
-                      data-image-hint={service.imageHint}
-                    >
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,color-mix(in_oklab,var(--brand-teal)_25%,transparent),transparent_60%),radial-gradient(circle_at_70%_70%,color-mix(in_oklab,var(--brand-indigo)_30%,transparent),transparent_60%)]" />
-                      <div className="absolute inset-0 bg-dots opacity-30" />
-                      <span className="relative z-10 px-4 text-center text-xs text-muted-foreground">
-                        [ AI visual placeholder ]
-                      </span>
+                    <div className="relative mt-6 hidden aspect-[4/3] w-full shrink-0 overflow-hidden rounded-xl border border-border lg:mt-0 lg:flex lg:w-80">
+                      <Image
+                        src="/images/courtroom-wide.jpg"
+                        alt="A wide view of a courtroom with an attorney reviewing case files"
+                        fill
+                        sizes="(min-width: 1024px) 20rem, 100vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-deep/50 to-transparent" />
                     </div>
                   )}
 

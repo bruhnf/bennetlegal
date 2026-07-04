@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Rocket, Target, Compass } from "lucide-react";
 import { team } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
@@ -32,7 +33,26 @@ export function About() {
           description="Bennet Legal Research Group is a startup with the ambition of an intelligence agency and the speed of a technology company. Young, hungry, and built for the way legal work is going — not the way it was."
         />
 
-        <RevealGroup className="mt-16 grid gap-6 md:grid-cols-3">
+        {/* Story image band */}
+        <Reveal>
+          <div className="relative mt-14 aspect-[21/9] w-full overflow-hidden rounded-xl border border-border">
+            <Image
+              src="/images/superior-court.jpg"
+              alt="Attorneys at work in a superior court of justice"
+              fill
+              sizes="(min-width: 1280px) 72rem, 100vw"
+              className="object-cover object-center"
+            />
+            <div className="photo-scrim-b absolute inset-0" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 p-6 sm:p-8">
+              <p className="max-w-md font-heading text-lg font-semibold text-[#f7f1e3] sm:text-xl">
+                Built for the room where it&apos;s decided.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <RevealGroup className="mt-10 grid gap-6 md:grid-cols-3">
           {pillars.map((pillar) => {
             const Icon = pillar.icon;
             return (

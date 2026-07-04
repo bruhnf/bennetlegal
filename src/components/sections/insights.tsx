@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock } from "lucide-react";
 import { insights } from "@/lib/content";
@@ -40,17 +41,17 @@ export function Insights() {
               href="/insights"
               className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card"
             >
-              <div
-                className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep"
-                data-image-hint={featured.imageHint}
-              >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,color-mix(in_oklab,var(--brand-teal)_30%,transparent),transparent_55%),radial-gradient(circle_at_80%_80%,color-mix(in_oklab,var(--brand-violet)_35%,transparent),transparent_55%)]" />
-                <div className="absolute inset-0 bg-dots opacity-30" />
-                <span className="absolute left-4 top-4 rounded-full bg-brand-gradient px-3 py-1 text-xs font-semibold text-white">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep">
+                <Image
+                  src="/images/justice-collage.jpg"
+                  alt="A collage of justice symbols — scales, a county courthouse, and the words Equal Justice Under Law"
+                  fill
+                  sizes="(min-width: 1024px) 40rem, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-deep/40 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-brand-gradient-warm px-3 py-1 text-xs font-semibold text-[#23180d]">
                   {featured.category}
-                </span>
-                <span className="absolute bottom-4 right-4 text-[11px] text-muted-foreground">
-                  [ AI cover placeholder ]
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-7">

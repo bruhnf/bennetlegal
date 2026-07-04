@@ -3,10 +3,11 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 /** Accessible dark/light toggle. Renders a stable placeholder until mounted to avoid hydration mismatch. */
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -18,7 +19,7 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      className="rounded-full text-muted-foreground hover:text-foreground"
+      className={cn("rounded-full text-muted-foreground hover:text-foreground", className)}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >

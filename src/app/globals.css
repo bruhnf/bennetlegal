@@ -5,11 +5,22 @@
 /* Dark mode is driven by a `.dark` class on <html> (managed by next-themes). */
 @custom-variant dark (&:is(.dark *));
 
-/* ------------------------------------------------------------------ */
-/*  Design tokens exposed to Tailwind                                  */
-/*  - Semantic tokens (background/card/primary/...) power shadcn/ui.   */
-/*  - Brand tokens (brand-navy/teal/indigo/coral/...) are our palette. */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  LAW_THEME — "Walnut & Brass"                                       */
+/*  A warm, traditional courtroom/justice aesthetic: parchment,        */
+/*  espresso, brass & oxblood accents, walnut panels, serif headings.  */
+/*                                                                     */
+/*  NOTE: brand token *names* are kept from the original theme         */
+/*  (brand-teal / brand-indigo / ...) so every component re-themes     */
+/*  automatically — the VALUES are remapped to the warm palette:       */
+/*    brand-teal        -> brass (primary accent)                      */
+/*    brand-teal-bright -> light brass                                 */
+/*    brand-cyan        -> gold                                        */
+/*    brand-indigo      -> deep navy                                   */
+/*    brand-violet      -> walnut                                      */
+/*    brand-coral       -> oxblood                                     */
+/*    brand-orange      -> burnished bronze                            */
+/* ================================================================== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -47,7 +58,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* --- Brand palette --- */
+  /* --- Brand palette (names preserved, warm values) --- */
   --color-brand-navy: var(--brand-navy);
   --color-brand-navy-deep: var(--brand-navy-deep);
   --color-brand-teal: var(--brand-teal);
@@ -58,6 +69,12 @@
   --color-brand-coral: var(--brand-coral);
   --color-brand-orange: var(--brand-orange);
 
+  /* Warm, human-friendly aliases (available if you want them) */
+  --color-brand-brass: var(--brand-teal);
+  --color-brand-gold: var(--brand-cyan);
+  --color-brand-walnut: var(--brand-violet);
+  --color-brand-oxblood: var(--brand-coral);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -66,7 +83,6 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Custom animations */
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
   --animate-aurora: aurora 18s ease infinite;
@@ -76,98 +92,106 @@
 }
 
 /* ------------------------------------------------------------------ */
-/*  Brand palette (constant across themes)                             */
+/*  Brand palette (constant across light/dark)                         */
 /* ------------------------------------------------------------------ */
 :root {
-  --brand-navy: #0a1128;
-  --brand-navy-deep: #060a18;
-  --brand-teal: #2dd4bf;
-  --brand-teal-bright: #22e3d3;
-  --brand-cyan: #22d3ee;
-  --brand-indigo: #6366f1;
-  --brand-violet: #8b5cf6;
-  --brand-coral: #ff6b57;
-  --brand-orange: #ff8a4c;
+  --brand-navy: #16283f;
+  --brand-navy-deep: #0e1c2e;
+  --brand-teal: #b0895a; /* brass */
+  --brand-teal-bright: #c6a15b; /* light brass */
+  --brand-cyan: #cba35a; /* gold */
+  --brand-indigo: #1e3a5f; /* deep navy */
+  --brand-violet: #4a3728; /* walnut */
+  --brand-coral: #7c2d2d; /* oxblood */
+  --brand-orange: #9c6b3f; /* burnished bronze */
 }
 
 /* ------------------------------------------------------------------ */
-/*  LIGHT THEME (elegant, optional)                                    */
+/*  LIGHT THEME — "Parchment" (default for law_theme)                  */
 /* ------------------------------------------------------------------ */
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  --background: #f6f8fd;
-  --foreground: #0a1128;
-  --card: #ffffff;
-  --card-foreground: #0a1128;
-  --popover: #ffffff;
-  --popover-foreground: #0a1128;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #eef2fb;
-  --secondary-foreground: #1b2440;
-  --muted: #eef2f9;
-  --muted-foreground: #55627d;
-  --accent: #e7ecfb;
-  --accent-foreground: #0a1128;
-  --destructive: #e11d48;
-  --border: rgba(10, 17, 40, 0.1);
-  --input: rgba(10, 17, 40, 0.14);
-  --ring: #14b8a6;
+  --background: #f3ecdd;
+  --foreground: #241c14;
+  --card: #fbf7ee;
+  --card-foreground: #241c14;
+  --popover: #fbf7ee;
+  --popover-foreground: #241c14;
+  --primary: #16283f;
+  --primary-foreground: #f7f1e3;
+  --secondary: #e9dfc9;
+  --secondary-foreground: #3a2e20;
+  --muted: #ebe1cc;
+  --muted-foreground: #6b5b45;
+  --accent: #e3d5b9;
+  --accent-foreground: #241c14;
+  --destructive: #7c2d2d;
+  --border: rgba(74, 55, 40, 0.18);
+  --input: rgba(74, 55, 40, 0.22);
+  --ring: #b0895a;
 
-  --chart-1: #14b8a6;
-  --chart-2: #6366f1;
-  --chart-3: #8b5cf6;
-  --chart-4: #ff8a4c;
-  --chart-5: #22d3ee;
+  /* Heading-accent gradient stops — deep bronze for contrast on parchment */
+  --text-grad-1: #a9793a;
+  --text-grad-2: #6f4622;
 
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0a1128;
-  --sidebar-primary: #4f46e5;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eef2fb;
-  --sidebar-accent-foreground: #0a1128;
-  --sidebar-border: rgba(10, 17, 40, 0.1);
-  --sidebar-ring: #14b8a6;
+  --chart-1: #b0895a;
+  --chart-2: #16283f;
+  --chart-3: #7c2d2d;
+  --chart-4: #9c6b3f;
+  --chart-5: #4a3728;
+
+  --sidebar: #fbf7ee;
+  --sidebar-foreground: #241c14;
+  --sidebar-primary: #16283f;
+  --sidebar-primary-foreground: #f7f1e3;
+  --sidebar-accent: #e9dfc9;
+  --sidebar-accent-foreground: #241c14;
+  --sidebar-border: rgba(74, 55, 40, 0.18);
+  --sidebar-ring: #b0895a;
 }
 
 /* ------------------------------------------------------------------ */
-/*  DARK THEME (default experience)                                    */
+/*  DARK THEME — "Chambers / Walnut" (optional toggle)                 */
 /* ------------------------------------------------------------------ */
 .dark {
-  --background: #060a18;
-  --foreground: #e8edf7;
-  --card: #0b1326;
-  --card-foreground: #e8edf7;
-  --popover: #0b1326;
-  --popover-foreground: #e8edf7;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #131c33;
-  --secondary-foreground: #c7d2e5;
-  --muted: #101a30;
-  --muted-foreground: #8a9ab8;
-  --accent: #0f1b33;
-  --accent-foreground: #e8edf7;
-  --destructive: #fb7185;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #2dd4bf;
+  --background: #17110a;
+  --foreground: #ede3d0;
+  --card: #221a10;
+  --card-foreground: #ede3d0;
+  --popover: #221a10;
+  --popover-foreground: #ede3d0;
+  --primary: #c6a15b;
+  --primary-foreground: #17110a;
+  --secondary: #2c2116;
+  --secondary-foreground: #e4d6bd;
+  --muted: #241b10;
+  --muted-foreground: #b9a789;
+  --accent: #2a2015;
+  --accent-foreground: #ede3d0;
+  --destructive: #e0937a;
+  --border: rgba(214, 182, 120, 0.14);
+  --input: rgba(214, 182, 120, 0.2);
+  --ring: #c6a15b;
 
-  --chart-1: #2dd4bf;
-  --chart-2: #6366f1;
-  --chart-3: #8b5cf6;
-  --chart-4: #ff8a4c;
-  --chart-5: #22d3ee;
+  /* Brighter brass on the dark walnut background */
+  --text-grad-1: #e0c081;
+  --text-grad-2: #b98a4e;
 
-  --sidebar: #0b1326;
-  --sidebar-foreground: #e8edf7;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #0f1b33;
-  --sidebar-accent-foreground: #e8edf7;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #2dd4bf;
+  --chart-1: #c6a15b;
+  --chart-2: #7fa0c4;
+  --chart-3: #cf9b7f;
+  --chart-4: #9c6b3f;
+  --chart-5: #b0895a;
+
+  --sidebar: #221a10;
+  --sidebar-foreground: #ede3d0;
+  --sidebar-primary: #c6a15b;
+  --sidebar-primary-foreground: #17110a;
+  --sidebar-accent: #2a2015;
+  --sidebar-accent-foreground: #ede3d0;
+  --sidebar-border: rgba(214, 182, 120, 0.14);
+  --sidebar-ring: #c6a15b;
 }
 
 @layer base {
@@ -180,67 +204,71 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "ss01", "cv01";
   }
-  /* Offset anchor scrolling for the sticky nav */
   section[id] {
     scroll-margin-top: 5rem;
   }
   h1, h2, h3, h4, h5 {
     @apply font-heading;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   ::selection {
-    background: color-mix(in oklab, var(--brand-teal) 35%, transparent);
+    background: color-mix(in oklab, var(--brand-teal) 40%, transparent);
     color: var(--foreground);
   }
 }
 
 /* ------------------------------------------------------------------ */
-/*  Reusable brand utilities                                           */
+/*  Reusable brand utilities (warm reinterpretations)                  */
 /* ------------------------------------------------------------------ */
 @layer utilities {
-  /* Gradient text used for accent words in headings */
+  /* Brass/gold gradient for accent words in headings */
   .text-gradient {
     background-image: linear-gradient(
       100deg,
-      var(--brand-teal-bright),
-      var(--brand-cyan) 35%,
-      var(--brand-indigo) 75%,
-      var(--brand-violet)
+      var(--text-grad-1),
+      var(--text-grad-2)
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .text-gradient-warm {
-    background-image: linear-gradient(100deg, var(--brand-orange), var(--brand-coral));
+    background-image: linear-gradient(100deg, var(--brand-cyan), var(--brand-coral));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Primary gradient surfaces (buttons, chips) */
+  /* Primary surface: prestigious deep-navy gradient (buttons/chips) */
   .bg-brand-gradient {
     background-image: linear-gradient(
       100deg,
-      var(--brand-teal),
-      var(--brand-indigo) 60%,
-      var(--brand-violet)
+      var(--brand-indigo),
+      var(--brand-navy) 70%,
+      var(--brand-navy-deep)
     );
   }
+  /* Secondary surface: brass gradient */
   .bg-brand-gradient-warm {
-    background-image: linear-gradient(100deg, var(--brand-orange), var(--brand-coral));
+    background-image: linear-gradient(100deg, var(--brand-teal-bright), var(--brand-orange));
   }
 
   /* Frosted glass card */
   .glass {
-    background: color-mix(in oklab, var(--card) 70%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in oklab, var(--card) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
   }
 
-  /* Animated gradient border wrapper */
+  /* Thin brass rule used as a section divider accent */
+  .brass-rule {
+    height: 2px;
+    width: 3.5rem;
+    background-image: linear-gradient(90deg, var(--brand-teal), transparent);
+  }
+
+  /* Animated gradient hairline border */
   .gradient-border {
     position: relative;
     background: var(--card);
@@ -255,8 +283,8 @@
     background: linear-gradient(
       130deg,
       color-mix(in oklab, var(--brand-teal) 60%, transparent),
-      transparent 40%,
-      color-mix(in oklab, var(--brand-indigo) 55%, transparent)
+      transparent 45%,
+      color-mix(in oklab, var(--brand-navy) 45%, transparent)
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -266,29 +294,50 @@
     pointer-events: none;
   }
 
-  /* Glow shadows */
+  /* Glows */
   .glow-teal {
-    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-teal) 30%, transparent),
-      0 12px 48px -12px color-mix(in oklab, var(--brand-teal) 45%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-teal) 34%, transparent),
+      0 14px 44px -16px color-mix(in oklab, var(--brand-teal) 55%, transparent);
   }
   .glow-indigo {
-    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-indigo) 30%, transparent),
-      0 12px 48px -12px color-mix(in oklab, var(--brand-indigo) 55%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-navy) 30%, transparent),
+      0 14px 44px -16px color-mix(in oklab, var(--brand-navy) 55%, transparent);
   }
 
-  /* Subtle dotted/grid backdrops */
   .bg-grid {
     background-image:
-      linear-gradient(color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+      linear-gradient(color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px);
     background-size: 44px 44px;
   }
   .bg-dots {
     background-image: radial-gradient(
-      color-mix(in oklab, var(--foreground) 12%, transparent) 1px,
+      color-mix(in oklab, var(--foreground) 10%, transparent) 1px,
       transparent 1px
     );
     background-size: 22px 22px;
+  }
+
+  /* Subtle paper grain for large surfaces */
+  .paper {
+    background-image:
+      radial-gradient(color-mix(in oklab, var(--brand-walnut) 5%, transparent) 1px, transparent 1px),
+      radial-gradient(color-mix(in oklab, var(--brand-walnut) 4%, transparent) 1px, transparent 1px);
+    background-size: 7px 7px, 13px 13px;
+    background-position: 0 0, 4px 6px;
+  }
+
+  /* Cinematic dark overlay for photo heroes/bands (keeps text readable) */
+  .photo-scrim {
+    background: linear-gradient(
+      to right,
+      rgba(10, 12, 18, 0.9) 0%,
+      rgba(10, 12, 18, 0.72) 42%,
+      rgba(10, 12, 18, 0.42) 100%
+    );
+  }
+  .photo-scrim-b {
+    background: linear-gradient(to top, rgba(10, 12, 18, 0.92), rgba(10, 12, 18, 0.35) 60%, transparent);
   }
 
   .mask-fade-b {
@@ -325,7 +374,6 @@
   50% { opacity: 1; }
 }
 
-/* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -337,13 +385,12 @@
   }
 }
 
-/* Nicer custom scrollbar (dark-first) */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--brand-indigo) 45%, transparent);
+  background: color-mix(in oklab, var(--brand-navy) 55%, transparent);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;

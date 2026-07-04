@@ -8,9 +8,12 @@ import { cn } from "@/lib/utils";
 export function BrandLogo({
   className,
   showWordmark = true,
+  light = false,
 }: {
   className?: string;
   showWordmark?: boolean;
+  /** Render the wordmark in light colors (for use over dark/photo backgrounds). */
+  light?: boolean;
 }) {
   return (
     <Link
@@ -37,10 +40,20 @@ export function BrandLogo({
       </span>
       {showWordmark && (
         <span className="flex flex-col leading-none">
-          <span className="font-heading text-[15px] font-bold tracking-tight text-foreground">
+          <span
+            className={cn(
+              "font-heading text-[15px] font-bold tracking-tight",
+              light ? "text-[#f7f1e3]" : "text-foreground",
+            )}
+          >
             Bennet Legal
           </span>
-          <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <span
+            className={cn(
+              "text-[10px] font-medium uppercase tracking-[0.18em]",
+              light ? "text-[#d8c8a8]" : "text-muted-foreground",
+            )}
+          >
             Research Group
           </span>
         </span>

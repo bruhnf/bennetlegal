@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { siteConfig } from "@/lib/site";
@@ -14,8 +14,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+// Elegant serif for headings — prestige/traditional law-firm feel.
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
@@ -69,8 +71,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#060a18" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f8fd" },
+    { media: "(prefers-color-scheme: dark)", color: "#17110a" },
+    { media: "(prefers-color-scheme: light)", color: "#f3ecdd" },
   ],
 };
 
@@ -81,12 +83,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
