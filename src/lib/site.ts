@@ -15,7 +15,7 @@ export const siteConfig = {
   // Public-facing contact details (placeholders — replace with real ones).
   contact: {
     email: "intelligence@bennetlegalpartners.com",
-    phone: "+1 (212) 555-0142",
+    phone: "+1 (845) 303-3380",
     address: "One Bryant Park, 42nd Floor, New York, NY 10036",
   },
   social: {
