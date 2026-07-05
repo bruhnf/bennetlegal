@@ -59,7 +59,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "CITE-LOCK citation verification plus senior analyst adjudication on every release" }
     ],
     tags: ["AI research", "citation-verified", "jurisdiction-aware", "LEXICON", "rapid turnaround"],
-    cta: { label: "Commission a research engagement", href: "/contact" }
+    cta: { label: "Commission a research engagement", href: "/#contact" }
   },
 
   "big-data": {
@@ -120,7 +120,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "SIGNAL-GRADE statistical validation with quantitative analyst review" }
     ],
     tags: ["big data", "cross-corpus", "CONFLUENCE", "analytics", "pattern mining"],
-    cta: { label: "Explore an analytics engagement", href: "/contact" }
+    cta: { label: "Explore an analytics engagement", href: "/#contact" }
   },
 
   "predictive": {
@@ -181,7 +181,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "CALIBRATE back-testing against held-out outcomes with reported model accuracy" }
     ],
     tags: ["predictive", "ORACLE", "outcome modeling", "judge analytics", "risk scoring"],
-    cta: { label: "Model your matter", href: "/contact" }
+    cta: { label: "Model your matter", href: "/#contact" }
   },
 
   "due-diligence": {
@@ -242,7 +242,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "CORROBORATE two-source confirmation with reliability grading and investigator review" }
     ],
     tags: ["due diligence", "SENTINEL", "ownership mapping", "reputation", "risk"],
-    cta: { label: "Request a diligence engagement", href: "/contact" }
+    cta: { label: "Request a diligence engagement", href: "/#contact" }
   },
 
   "compliance": {
@@ -303,7 +303,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "CLARITY second-analyst review for accuracy, scope, and advice-line integrity" }
     ],
     tags: ["compliance", "MERIDIAN", "multi-jurisdiction", "change alerts", "interpretation"],
-    cta: { label: "Start a monitoring engagement", href: "/contact" }
+    cta: { label: "Start a monitoring engagement", href: "/#contact" }
   },
 
   "referral": {
@@ -364,7 +364,7 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "Credential and track-record vetting plus FITCHECK conflict and availability screening" }
     ],
     tags: ["referral", "COMPASS", "vetted counsel", "precision matching", "track record"],
-    cta: { label: "Request a counsel match", href: "/contact" }
+    cta: { label: "Request a counsel match", href: "/#contact" }
   },
 
   "reports": {
@@ -425,6 +425,6 @@ export const serviceDetails: DetailMap = {
       { label: "Accuracy / QA", value: "POLISH source reconciliation, editorial review, and principal sign-off" }
     ],
     tags: ["reports", "ATELIER", "executive summary", "data visualization", "recommendations"],
-    cta: { label: "Commission a custom report", href: "/contact" }
+    cta: { label: "Commission a custom report", href: "/#contact" }
   }
 };

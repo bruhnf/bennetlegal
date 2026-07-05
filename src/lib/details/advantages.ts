@@ -51,7 +51,7 @@ export const advantageDetails: DetailMap = {
       { label: "Orchestration platform", value: "VELOCITY GRID" }
     ],
     tags: ["Rapid turnaround", "Parallel processing", "AI pipelines", "Momentum", "Time-critical"],
-    cta: { label: "Commission a rapid-turnaround engagement", href: "/contact" }
+    cta: { label: "Commission a rapid-turnaround engagement", href: "/#contact" }
   },
   "depth-of-analysis": {
     slug: "depth-of-analysis",
@@ -103,7 +103,7 @@ export const advantageDetails: DetailMap = {
       { label: "Deliverable audit trail", value: "COVERAGE LEDGER included" }
     ],
     tags: ["Exhaustive coverage", "Multi-jurisdictional", "Multi-corpus", "Completeness", "Auditable"],
-    cta: { label: "Request an exhaustive coverage analysis", href: "/contact" }
+    cta: { label: "Request an exhaustive coverage analysis", href: "/#contact" }
   },
   "creative-problem-solving": {
     slug: "creative-problem-solving",
@@ -155,7 +155,7 @@ export const advantageDetails: DetailMap = {
       { label: "Adversarial review", value: "Mandatory second-analyst gate" }
     ],
     tags: ["Human ingenuity", "Creative reasoning", "AI-augmented", "Novel arguments", "Analyst-led"],
-    cta: { label: "Bring us your hardest problem", href: "/contact" }
+    cta: { label: "Bring us your hardest problem", href: "/#contact" }
   },
   "ironclad-confidentiality": {
     slug: "ironclad-confidentiality",
@@ -207,6 +207,6 @@ export const advantageDetails: DetailMap = {
       { label: "Client-data breaches", value: "Zero on record" }
     ],
     tags: ["Confidentiality", "Bank-grade security", "Access control", "Certified", "Data residency"],
-    cta: { label: "Review our security posture", href: "/contact" }
+    cta: { label: "Review our security posture", href: "/#contact" }
   }
 };

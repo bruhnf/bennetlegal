@@ -68,7 +68,7 @@ export const insightDetails: DetailMap = {
       { label: "Topics", value: "AI research, discovery, benchmarking, firm strategy" }
     ],
     tags: ["AI research", "benchmarking", "discovery", "firm strategy", "intelligence gap"],
-    cta: { label: "Request a confidential maturity assessment", href: "/contact" }
+    cta: { label: "Request a confidential maturity assessment", href: "/#contact" }
   },
 
   "predicting-circuit-splits": {
@@ -138,7 +138,7 @@ export const insightDetails: DetailMap = {
       { label: "Topics", value: "Predictive modeling, appellate law, circuit splits, litigation strategy" }
     ],
     tags: ["predictive modeling", "appellate law", "circuit splits", "machine learning", "litigation strategy"],
-    cta: { label: "Subscribe to SPLITCAST alerts", href: "/contact" }
+    cta: { label: "Subscribe to SPLITCAST alerts", href: "/#contact" }
   },
 
   "regulatory-whiplash-2026": {
@@ -208,7 +208,7 @@ export const insightDetails: DetailMap = {
       { label: "Topics", value: "Regulatory monitoring, compliance, cross-border risk, operating frameworks" }
     ],
     tags: ["compliance", "regulatory monitoring", "cross-border risk", "governance", "operating framework"],
-    cta: { label: "Request confidential exposure mapping", href: "/contact" }
+    cta: { label: "Request confidential exposure mapping", href: "/#contact" }
   },
 
   "due-diligence-at-deal-speed": {
@@ -278,6 +278,6 @@ export const insightDetails: DetailMap = {
       { label: "Topics", value: "M&A diligence, target intelligence, entity graphs, deal strategy" }
     ],
     tags: ["due diligence", "M&A", "target intelligence", "entity graphs", "deal strategy"],
-    cta: { label: "Commission a target intelligence engagement", href: "/contact" }
+    cta: { label: "Commission a target intelligence engagement", href: "/#contact" }
   }
 };

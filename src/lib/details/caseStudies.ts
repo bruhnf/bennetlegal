@@ -61,7 +61,7 @@ export const caseStudyDetails: DetailMap = {
       { label: "Confidentiality", value: "Fully anonymized, privileged workspace" }
     ],
     tags: ["Litigation Intelligence", "Precedent Mapping", "Intellectual Property", "Cross-Jurisdictional", "AI Research"],
-    cta: { label: "Discuss a high-stakes matter", href: "/contact" }
+    cta: { label: "Discuss a high-stakes matter", href: "/#contact" }
   },
   "fortune500-acquisition-derisk": {
     slug: "fortune500-acquisition-derisk",
@@ -123,7 +123,7 @@ export const caseStudyDetails: DetailMap = {
       { label: "Confidentiality", value: "Fully anonymized, deal-team firewall" }
     ],
     tags: ["Diligence Intelligence", "M&A", "Regulatory Risk", "Cross-Border", "Exposure Mapping"],
-    cta: { label: "De-risk your next transaction", href: "/contact" }
+    cta: { label: "De-risk your next transaction", href: "/#contact" }
   },
   "regulatory-forecast-trading-desk": {
     slug: "regulatory-forecast-trading-desk",
@@ -185,7 +185,7 @@ export const caseStudyDetails: DetailMap = {
       { label: "Confidentiality", value: "Fully anonymized, desk-level firewall" }
     ],
     tags: ["Predictive Intelligence", "Regulatory Forecasting", "Compliance", "Financial Services", "Risk Foresight"],
-    cta: { label: "Get ahead of your regulators", href: "/contact" }
+    cta: { label: "Get ahead of your regulators", href: "/#contact" }
   },
   "biotech-patent-moat": {
     slug: "biotech-patent-moat",
@@ -247,6 +247,6 @@ export const caseStudyDetails: DetailMap = {
       { label: "Confidentiality", value: "Fully anonymized, pre-filing privileged workspace" }
     ],
     tags: ["Patent Intelligence", "White-Space Analysis", "Biotech", "IP Strategy", "Landscape Mapping"],
-    cta: { label: "Map your patent landscape", href: "/contact" }
+    cta: { label: "Map your patent landscape", href: "/#contact" }
   }
 };
