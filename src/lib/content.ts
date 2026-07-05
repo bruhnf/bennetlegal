@@ -275,15 +275,15 @@ export const team: TeamMember[] = [
     name: "Robert Bennet",
     role: "Co-Founder & Chief Executive Officer",
     bio: "Robert set out to build the research partner he could never find at the counsel's table. He steers Bennet's vision, culture, and client relationships around a single mandate: deliver the decisive edge, every time.",
-    image: "/images/team/robert-bennet.jpg",
-    objectPosition: "50% 22%",
+    image: "/images/team/robert-bennet.png",
+    objectPosition: "50% 30%",
   },
   {
     name: "Dr. Olivia Bennet",
     role: "Co-Founder & Chief Intelligence Officer",
     bio: "Olivia pairs a doctorate in data science with a decade inside high-stakes litigation. She architects the proprietary models and analytical rigor that turn oceans of legal data into answers you can act on.",
     image: "/images/team/olivia-bennet.png",
-    objectPosition: "50% 30%",
+    objectPosition: "50% 28%",
   },
   {
     name: "Alex Barzane",
@@ -311,7 +311,7 @@ export const team: TeamMember[] = [
     role: "V.P., Marketing & Strategy",
     bio: "Cora shapes how the world understands Bennet. She leads brand, market strategy, and client storytelling — translating complex intelligence into a message that lands in the boardroom.",
     image: "/images/team/cora-frost.png",
-    objectPosition: "50% 25%",
+    objectPosition: "50% 42%",
   },
 ];
 
