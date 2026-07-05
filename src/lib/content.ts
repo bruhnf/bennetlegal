@@ -264,27 +264,54 @@ export type TeamMember = {
   name: string;
   role: string;
   bio: string;
-  imageHint: string;
+  /** Path to a headshot under /public. */
+  image: string;
+  /** CSS object-position for the round avatar crop (bias toward the face). */
+  objectPosition?: string;
 };
 
 export const team: TeamMember[] = [
   {
-    name: "Dr. Elena Bennet",
-    role: "Founder & Chief Intelligence Officer",
-    bio: "Former litigation strategist turned data scientist. Built the vision for research that thinks as fast as the case moves.",
-    imageHint: "Confident female executive portrait, dark studio lighting, teal rim light",
+    name: "Robert Bennet",
+    role: "Co-Founder & Chief Executive Officer",
+    bio: "Robert set out to build the research partner he could never find at the counsel's table. He steers Bennet's vision, culture, and client relationships around a single mandate: deliver the decisive edge, every time.",
+    image: "/images/team/robert-bennet.jpg",
+    objectPosition: "50% 22%",
   },
   {
-    name: "Marcus Okonkwo",
-    role: "Head of AI & Data Science",
-    bio: "Machine-learning veteran who architected our proprietary legal models and the intelligence layer beneath them.",
-    imageHint: "Male AI researcher portrait, dark background, indigo rim light",
+    name: "Dr. Olivia Bennet",
+    role: "Co-Founder & Chief Intelligence Officer",
+    bio: "Olivia pairs a doctorate in data science with a decade inside high-stakes litigation. She architects the proprietary models and analytical rigor that turn oceans of legal data into answers you can act on.",
+    image: "/images/team/olivia-bennet.png",
+    objectPosition: "50% 30%",
   },
   {
-    name: "Priya Raman",
-    role: "Director of Investigative Research",
-    bio: "Investigative journalist and analyst who leads our deep due-diligence and competitive-intelligence practice.",
-    imageHint: "Female investigator portrait, dark background, warm coral rim light",
+    name: "Alex Barzane",
+    role: "V.P. & Chief Legal Officer",
+    bio: "A former appellate litigator, Alex keeps every engagement airtight — governing methodology, privilege, and compliance so Bennet's intelligence is not just powerful, but defensible.",
+    image: "/images/team/alex-barzane.png",
+    objectPosition: "50% 25%",
+  },
+  {
+    name: "Becky Delgado",
+    role: "V.P. & Chief Financial Officer",
+    bio: "Becky brings decades of financial stewardship to Bennet, aligning disciplined growth with the resources our analysts need. She makes certain that ambition and accountability always move in step.",
+    image: "/images/team/becky-delgado.png",
+    objectPosition: "50% 28%",
+  },
+  {
+    name: "James Morris",
+    role: "V.P. & Chief Operating Officer",
+    bio: "James turns strategy into execution. He runs the operating engine behind every engagement, ensuring intelligence is delivered on time, at scale, and to an exacting standard.",
+    image: "/images/team/james-morris.jpg",
+    objectPosition: "50% 18%",
+  },
+  {
+    name: "Cora Frost",
+    role: "V.P., Marketing & Strategy",
+    bio: "Cora shapes how the world understands Bennet. She leads brand, market strategy, and client storytelling — translating complex intelligence into a message that lands in the boardroom.",
+    image: "/images/team/cora-frost.png",
+    objectPosition: "50% 25%",
   },
 ];
 
