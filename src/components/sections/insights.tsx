@@ -38,7 +38,7 @@ export function Insights() {
           {/* Featured */}
           <RevealItem className="lg:row-span-2">
             <Link
-              href="/insights"
+              href={`/insights/${featured.slug}`}
               className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep">
@@ -78,9 +78,9 @@ export function Insights() {
           {/* Secondary list */}
           <RevealGroup className="flex flex-col gap-6">
             {rest.map((post) => (
-              <RevealItem key={post.title}>
+              <RevealItem key={post.slug}>
                 <Link
-                  href="/insights"
+                  href={`/insights/${post.slug}`}
                   className="group flex gap-5 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-teal/40"
                 >
                   <div

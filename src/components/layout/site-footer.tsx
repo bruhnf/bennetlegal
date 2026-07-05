@@ -70,7 +70,7 @@ export function SiteFooter() {
               {services.slice(0, 5).map((service) => (
                 <li key={service.id}>
                   <Link
-                    href={`/#services`}
+                    href={`/services/${service.id}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {service.title}

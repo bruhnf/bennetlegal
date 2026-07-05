@@ -110,6 +110,7 @@ export const services: Service[] = [
 ];
 
 export type Differentiator = {
+  slug: string;
   icon: LucideIcon;
   title: string;
   description: string;
@@ -117,24 +118,28 @@ export type Differentiator = {
 
 export const differentiators: Differentiator[] = [
   {
+    slug: "speed-of-insight",
     icon: Zap,
     title: "Speed of Insight",
     description:
       "What used to take an army of associates weeks, we deliver in hours. Momentum is a competitive advantage — we give it back to you.",
   },
   {
+    slug: "depth-of-analysis",
     icon: Layers,
     title: "Depth of Analysis",
     description:
       "We go past the first page of results. Every corpus, every jurisdiction, every angle — mined until the full picture is undeniable.",
   },
   {
+    slug: "creative-problem-solving",
     icon: Lightbulb,
     title: "Creative Problem-Solving",
     description:
       "Data is the start, not the answer. Our analysts pair machine scale with human ingenuity to find the argument no one else saw.",
   },
   {
+    slug: "ironclad-confidentiality",
     icon: Lock,
     title: "Ironclad Confidentiality",
     description:
@@ -157,6 +162,7 @@ export const stats: Stat[] = [
 ];
 
 export type Insight = {
+  slug: string;
   category: string;
   title: string;
   excerpt: string;
@@ -168,6 +174,7 @@ export type Insight = {
 
 export const insights: Insight[] = [
   {
+    slug: "state-of-ai-legal-research-2026",
     category: "White Paper",
     title: "The 2026 State of AI in Legal Research",
     excerpt:
@@ -178,6 +185,7 @@ export const insights: Insight[] = [
     featured: true,
   },
   {
+    slug: "predicting-circuit-splits",
     category: "Data Report",
     title: "Predicting Circuit Splits: A Machine-Learning Study",
     excerpt:
@@ -187,6 +195,7 @@ export const insights: Insight[] = [
     imageHint: "Data visualization of US circuit courts with predictive heat map",
   },
   {
+    slug: "regulatory-whiplash-2026",
     category: "Analysis",
     title: "Regulatory Whiplash: Navigating 2026's Compliance Storm",
     excerpt:
@@ -196,6 +205,7 @@ export const insights: Insight[] = [
     imageHint: "Stormy world map with regulatory zones and a clear path through, coral highlights",
   },
   {
+    slug: "due-diligence-at-deal-speed",
     category: "Playbook",
     title: "Due Diligence at Deal Speed",
     excerpt:
@@ -207,6 +217,7 @@ export const insights: Insight[] = [
 ];
 
 export type SuccessStory = {
+  slug: string;
   sector: string;
   title: string;
   challenge: string;
@@ -215,6 +226,7 @@ export type SuccessStory = {
 
 export const successStories: SuccessStory[] = [
   {
+    slug: "amlaw-ip-landmark-win",
     sector: "AmLaw 100 Firm",
     title: "Turning a losing case into a landmark win",
     challenge:
@@ -226,6 +238,7 @@ export const successStories: SuccessStory[] = [
     ],
   },
   {
+    slug: "fortune500-acquisition-derisk",
     sector: "Fortune 500 Enterprise",
     title: "De-risking a multinational acquisition",
     challenge:
@@ -237,6 +250,7 @@ export const successStories: SuccessStory[] = [
     ],
   },
   {
+    slug: "regulatory-forecast-trading-desk",
     sector: "Global Investment Bank",
     title: "Forecasting a regulatory shift ahead of the market",
     challenge:
@@ -248,6 +262,7 @@ export const successStories: SuccessStory[] = [
     ],
   },
   {
+    slug: "biotech-patent-moat",
     sector: "Biotech Scale-Up",
     title: "Building a patent moat from raw data",
     challenge:
@@ -261,6 +276,7 @@ export const successStories: SuccessStory[] = [
 ];
 
 export type TeamMember = {
+  slug: string;
   name: string;
   role: string;
   bio: string;
@@ -272,6 +288,7 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
+    slug: "robert-bennet",
     name: "Robert Bennet",
     role: "Co-Founder & Chief Executive Officer",
     bio: "Robert set out to build the research partner he could never find at the counsel's table. He steers Bennet's vision, culture, and client relationships around a single mandate: deliver the decisive edge, every time.",
@@ -279,6 +296,7 @@ export const team: TeamMember[] = [
     objectPosition: "50% 30%",
   },
   {
+    slug: "olivia-bennet",
     name: "Dr. Olivia Bennet",
     role: "Co-Founder & Chief Intelligence Officer",
     bio: "Olivia pairs a doctorate in data science with a decade inside high-stakes litigation. She architects the proprietary models and analytical rigor that turn oceans of legal data into answers you can act on.",
@@ -286,6 +304,7 @@ export const team: TeamMember[] = [
     objectPosition: "50% 28%",
   },
   {
+    slug: "alex-barzane",
     name: "Alex Barzane",
     role: "V.P. & Chief Legal Officer",
     bio: "A former appellate litigator, Alex keeps every engagement airtight — governing methodology, privilege, and compliance so Bennet's intelligence is not just powerful, but defensible.",
@@ -293,6 +312,7 @@ export const team: TeamMember[] = [
     objectPosition: "50% 25%",
   },
   {
+    slug: "becky-delgado",
     name: "Becky Delgado",
     role: "V.P. & Chief Financial Officer",
     bio: "Becky brings decades of financial stewardship to Bennet, aligning disciplined growth with the resources our analysts need. She makes certain that ambition and accountability always move in step.",
@@ -300,6 +320,7 @@ export const team: TeamMember[] = [
     objectPosition: "50% 28%",
   },
   {
+    slug: "james-morris",
     name: "James Morris",
     role: "V.P. & Chief Operating Officer",
     bio: "James turns strategy into execution. He runs the operating engine behind every engagement, ensuring intelligence is delivered on time, at scale, and to an exacting standard.",
@@ -307,6 +328,7 @@ export const team: TeamMember[] = [
     objectPosition: "50% 18%",
   },
   {
+    slug: "cora-frost",
     name: "Cora Frost",
     role: "V.P., Marketing & Strategy",
     bio: "Cora shapes how the world understands Bennet. She leads brand, market strategy, and client storytelling — translating complex intelligence into a message that lands in the boardroom.",

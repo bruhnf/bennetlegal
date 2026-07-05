@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { differentiators } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { RevealGroup, RevealItem, Reveal } from "@/components/reveal";
@@ -37,8 +39,11 @@ export function WhyBennet() {
             {differentiators.map((item) => {
               const Icon = item.icon;
               return (
-                <RevealItem key={item.title}>
-                  <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-indigo/40">
+                <RevealItem key={item.slug}>
+                  <Link
+                    href={`/advantages/${item.slug}`}
+                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                  >
                     <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-lg shadow-brand-indigo/25">
                       <Icon className="h-6 w-6" />
                     </span>
@@ -46,7 +51,11 @@ export function WhyBennet() {
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {item.description}
                     </p>
-                  </div>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-foreground/70 transition-colors group-hover:text-brand-teal">
+                      Learn more
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </Link>
                 </RevealItem>
               );
             })}

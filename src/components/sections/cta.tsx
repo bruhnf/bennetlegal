@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calendar, Mail, MessageSquare, Phone, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Calendar, Mail, MessageSquare, Phone, ShieldCheck } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
@@ -11,16 +11,19 @@ const engageOptions = [
     icon: MessageSquare,
     title: "Request Intelligence",
     body: "Send us the matter. We'll scope an engagement and respond within one business day.",
+    href: "#request-form",
   },
   {
     icon: Calendar,
     title: "Book a Strategy Call",
     body: "A 30-minute working session with a senior analyst to pressure-test your approach.",
+    href: "#request-form",
   },
   {
     icon: ShieldCheck,
     title: "Reserve a Sprint",
     body: "A fixed-scope intelligence sprint for time-critical matters — kickoff within 48 hours.",
+    href: "#request-form",
   },
 ];
 
@@ -52,15 +55,21 @@ export function CTA() {
               const Icon = opt.icon;
               return (
                 <Reveal key={opt.title}>
-                  <div className="flex gap-4 rounded-2xl border border-border bg-card/60 p-5">
+                  <Link
+                    href={opt.href}
+                    className="group flex gap-4 rounded-2xl border border-border bg-card/60 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-teal/40"
+                  >
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="font-heading text-base font-bold">{opt.title}</h3>
+                      <h3 className="flex items-center gap-1 font-heading text-base font-bold">
+                        {opt.title}
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-teal" />
+                      </h3>
                       <p className="mt-1 text-sm text-muted-foreground">{opt.body}</p>
                     </div>
-                  </div>
+                  </Link>
                 </Reveal>
               );
             })}
@@ -95,7 +104,9 @@ export function CTA() {
 
           {/* Right: the form */}
           <Reveal direction="left">
-            <ContactForm />
+            <div id="request-form" className="scroll-mt-24">
+              <ContactForm />
+            </div>
           </Reveal>
         </div>
 
@@ -104,7 +115,7 @@ export function CTA() {
             Bennet Legal Research Group provides research and intelligence services only. We are
             not a law firm and do not provide legal advice or representation. Contacting us does
             not create an attorney-client relationship. For counsel, ask us about our{" "}
-            <Link href="/#services" className="underline hover:text-foreground">
+            <Link href="/services/referral" className="underline hover:text-foreground">
               Attorney Referral Network
             </Link>
             .

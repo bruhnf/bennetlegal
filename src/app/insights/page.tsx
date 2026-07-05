@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Clock } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import { insights } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 
@@ -36,8 +36,9 @@ export default function InsightsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {insights.map((post) => (
-              <article
-                key={post.title}
+              <Link
+                key={post.slug}
+                href={`/insights/${post.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
               >
                 <div
@@ -63,11 +64,12 @@ export default function InsightsPage() {
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {post.excerpt}
                   </p>
-                  <span className="mt-4 text-sm font-semibold text-brand-teal">
-                    Full report coming soon →
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-teal">
+                    Read the report
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
 

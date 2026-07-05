@@ -27,7 +27,8 @@ export function Services() {
                 key={service.id}
                 className={cn(featured && "lg:col-span-2")}
               >
-                <article
+                <Link
+                  href={`/services/${service.id}`}
                   className={cn(
                     "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:shadow-xl hover:shadow-brand-indigo/10 sm:p-7",
                     featured && "lg:flex-row lg:items-center lg:gap-8",
@@ -82,17 +83,11 @@ export function Services() {
                     </div>
                   )}
 
-                  <Link
-                    href="/#contact"
-                    className={cn(
-                      "mt-6 inline-flex items-center gap-1 text-sm font-semibold text-foreground/80 transition-colors hover:text-brand-teal",
-                      featured && "lg:hidden",
-                    )}
-                  >
-                    Explore this service
+                  <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-foreground/80 transition-colors group-hover:text-brand-teal">
+                    Read the brief
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                </article>
+                  </span>
+                </Link>
               </RevealItem>
             );
           })}

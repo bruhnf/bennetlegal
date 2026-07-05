@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { successStories } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { RevealGroup, RevealItem } from "@/components/reveal";
@@ -20,8 +22,11 @@ export function SuccessStories() {
 
         <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2">
           {successStories.map((story) => (
-            <RevealItem key={story.title}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:glow-teal">
+            <RevealItem key={story.slug}>
+              <Link
+                href={`/case-studies/${story.slug}`}
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:glow-teal"
+              >
                 <div
                   className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-brand-teal/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"
@@ -51,7 +56,12 @@ export function SuccessStories() {
                     </div>
                   ))}
                 </div>
-              </article>
+
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-foreground/70 transition-colors group-hover:text-brand-teal">
+                  Read the case study
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
             </RevealItem>
           ))}
         </RevealGroup>

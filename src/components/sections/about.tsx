@@ -1,21 +1,25 @@
 import Image from "next/image";
-import { Rocket, Target, Compass } from "lucide-react";
+import Link from "next/link";
+import { Rocket, Target, Compass, ArrowUpRight } from "lucide-react";
 import { team } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { RevealGroup, RevealItem, Reveal } from "@/components/reveal";
 
 const pillars = [
   {
+    href: "/about#story",
     icon: Rocket,
     title: "Our story",
     body: "Founded by litigators and data scientists who were tired of watching great cases lost to slow, shallow research. We built the intelligence engine we always wished we had.",
   },
   {
+    href: "/about#mission",
     icon: Target,
     title: "Our mission",
     body: "To give every serious legal team an unfair advantage — decisive intelligence, delivered at the speed the moment demands, without ever compromising rigor or confidentiality.",
   },
   {
+    href: "/about#vision",
     icon: Compass,
     title: "Our vision",
     body: "A world where the best argument wins because the best intelligence found it first. We're building the research layer for the next era of law.",
@@ -57,7 +61,10 @@ export function About() {
             const Icon = pillar.icon;
             return (
               <RevealItem key={pillar.title}>
-                <div className="h-full rounded-2xl border border-border bg-card p-7">
+                <Link
+                  href={pillar.href}
+                  className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                >
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-secondary/50 text-brand-teal">
                     <Icon className="h-6 w-6" />
                   </span>
@@ -65,7 +72,11 @@ export function About() {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {pillar.body}
                   </p>
-                </div>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-foreground/70 transition-colors group-hover:text-brand-teal">
+                    Read more
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </Link>
               </RevealItem>
             );
           })}
@@ -84,8 +95,11 @@ export function About() {
 
           <RevealGroup className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
-              <RevealItem key={member.name}>
-                <div className="group flex h-full flex-col items-center rounded-2xl border border-border bg-card p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40">
+              <RevealItem key={member.slug}>
+                <Link
+                  href={`/team/${member.slug}`}
+                  className="group flex h-full flex-col items-center rounded-2xl border border-border bg-card p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                >
                   <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-brand-teal/30 bg-brand-navy-deep shadow-md ring-2 ring-border">
                     <Image
                       src={member.image}
@@ -101,7 +115,11 @@ export function About() {
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     {member.bio}
                   </p>
-                </div>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-foreground/70 transition-colors group-hover:text-brand-teal">
+                    Full profile
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </Link>
               </RevealItem>
             ))}
           </RevealGroup>
