@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import { insights } from "@/lib/content";
@@ -41,12 +42,14 @@ export default function InsightsPage() {
                 href={`/insights/${post.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
               >
-                <div
-                  className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep"
-                  data-image-hint={post.imageHint}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,color-mix(in_oklab,var(--brand-teal)_28%,transparent),transparent_55%),radial-gradient(circle_at_80%_80%,color-mix(in_oklab,var(--brand-violet)_32%,transparent),transparent_55%)]" />
-                  <div className="absolute inset-0 bg-dots opacity-30" />
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
                   <span className="absolute left-4 top-4 rounded-full bg-brand-gradient px-3 py-1 text-xs font-semibold text-white">
                     {post.category}
                   </span>

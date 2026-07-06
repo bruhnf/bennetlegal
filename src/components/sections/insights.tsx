@@ -43,11 +43,11 @@ export function Insights() {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy-deep">
                 <Image
-                  src="/images/justice-collage.jpg"
-                  alt="A collage of justice symbols — scales, a county courthouse, and the words Equal Justice Under Law"
+                  src={featured.image}
+                  alt={featured.title}
                   fill
                   sizes="(min-width: 1024px) 40rem, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-deep/40 to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full bg-brand-gradient-warm px-3 py-1 text-xs font-semibold text-[#23180d]">
@@ -87,10 +87,14 @@ export function Insights() {
                     className={cn(
                       "relative hidden aspect-square w-28 shrink-0 overflow-hidden rounded-xl bg-brand-navy-deep sm:block",
                     )}
-                    data-image-hint={post.imageHint}
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,color-mix(in_oklab,var(--brand-indigo)_35%,transparent),transparent_60%)]" />
-                    <div className="absolute inset-0 bg-dots opacity-30" />
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="7rem"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-3 text-xs text-muted-foreground">

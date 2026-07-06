@@ -168,6 +168,7 @@ export type Insight = {
   excerpt: string;
   readTime: string;
   date: string;
+  image: string;
   imageHint: string;
   featured?: boolean;
 };
@@ -181,6 +182,7 @@ export const insights: Insight[] = [
       "How large firms are compressing months of discovery into days — and the intelligence gap opening between those who adopt and those who don't.",
     readTime: "14 min read",
     date: "Jun 2026",
+    image: "/images/insights/state-of-ai-legal-research-2026.jpg",
     imageHint: "Cover art: glowing AI brain over legal library, teal-indigo gradient, report cover",
     featured: true,
   },
@@ -192,6 +194,7 @@ export const insights: Insight[] = [
       "We trained a model on 40 years of appellate decisions. Here's what it reveals about where the next circuit split will emerge.",
     readTime: "9 min read",
     date: "May 2026",
+    image: "/images/insights/predicting-circuit-splits.jpg",
     imageHint: "Data visualization of US circuit courts with predictive heat map",
   },
   {
@@ -202,6 +205,7 @@ export const insights: Insight[] = [
       "Cross-border regulation is changing faster than legal teams can track. Our framework for staying ahead of the next shift.",
     readTime: "7 min read",
     date: "May 2026",
+    image: "/images/insights/regulatory-whiplash-2026.jpg",
     imageHint: "Stormy world map with regulatory zones and a clear path through, coral highlights",
   },
   {
@@ -212,6 +216,7 @@ export const insights: Insight[] = [
       "A field guide to running exhaustive background intelligence on a target company without slowing the transaction.",
     readTime: "11 min read",
     date: "Apr 2026",
+    image: "/images/insights/due-diligence-at-deal-speed.jpg",
     imageHint: "Corporate network graph with due-diligence checklist overlay, indigo palette",
   },
 ];
